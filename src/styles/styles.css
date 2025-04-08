@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    background: white;
+}
+
+.app{
+    background: rgb(97, 250, 59);
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.app h1{
+    font-size: 25px;
+    color: black;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+}
+
+.calc{
+    padding: 20px 0;
+}
+
+.calc h2{
+    font-size: 18px;
+}
+
+.btn{
+    background-color: white;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid#222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover{
+    background-color: rgb(204, 204, 204);
+    color: black;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Umístí tlačítka na opačné konce */
+    align-items: center; /* Zarovná tlačítka vertikálně na střed (pokud by měly různou výšku) */
+    padding: 0 0px; /* Přidá trochu místa kolem tlačítek */
+}
+
+#next-btn {
+    background-color: white;
+    color: black;
+    font-weight: 500;
+    width: 200px;
+    border: 0;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px; 
+}
+
+#prev-btn {
+    background-color: white;
+    color: black;
+    font-weight: 500;
+    width: 200px;
+    border: 0;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
