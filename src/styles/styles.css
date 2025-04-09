@@ -83,3 +83,9 @@ body{
     cursor: pointer;
     margin-top: 20px;
 }
+
+.btn.active{
+    background-color: black;
+    color: white;
+
+}
