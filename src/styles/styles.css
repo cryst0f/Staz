@@ -10,7 +10,7 @@ body{
 }
 
 .app{
-    background: rgb(97, 250, 59);
+    background: rgb(74, 230, 113);
     width: 90%;
     max-width: 600px;
     margin: 100px auto 0;
@@ -87,5 +87,4 @@ body{
 .btn.active{
     background-color: black;
     color: white;
-
 }
