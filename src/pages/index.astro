@@ -1,7 +1,5 @@
 ---
 import '../styles/styles.css';
-title: "Kybernetický Dotazník"
-description: "Zjistěte, zda vaše organizace splňuje požadavky NIS2 zákona."
 ---
 
 <html lang="cs">
@@ -10,6 +8,8 @@ description: "Zjistěte, zda vaše organizace splňuje požadavky NIS2 zákona."
   <title>
     Kalkulacka
   </title>
+  <link rel="stylesheet"  href="styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <div class="app">
@@ -18,11 +18,14 @@ description: "Zjistěte, zda vaše organizace splňuje požadavky NIS2 zákona."
   <div class="calc">
     <h2 id="question">Otazka c.1</h2>
     <div id="answer-buttons">
-
     </div>
     <div class="button-container">
     <button id="prev-btn">Předchozí</button>
     <button id="next-btn">Dalsi</button>
+    </div>
+    <div class="select-box">
+
+      <i class="fa fa-chevron-down" aria-hidden="true"></i>
     </div>
   </div>
   <script src="/script.js" is:inline></script>

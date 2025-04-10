@@ -1,6 +1,7 @@
 const questions = [
     {
         question: "Otazka cislo jedna",
+        type: "select",
         answers: [
             { text: "odpoved 1"},
             { text: "odpoved 2"},           
@@ -8,6 +9,7 @@ const questions = [
     },
     {
         question: "Otazka cislo dva",
+        type: "buttons",
         answers: [
             {text: "odpoved 1"},
             {text: "odpoved 2"},           
@@ -15,6 +17,7 @@ const questions = [
     },
     {
         question: "Otazka cislo tri",
+        type: "buttons",
         answers: [
             {text: "odpoved 1"},
             {text: "odpoved 2"},           
@@ -22,6 +25,7 @@ const questions = [
     },
     {
         question: "Otazka cislo ctyri",
+        type: "select",
         answers: [
             {text: "odpoved 1"},
             {text: "odpoved 2"},           
@@ -29,6 +33,7 @@ const questions = [
     },
     {
         question: "Otazka cislo pet",
+        type: "buttons",
         answers: [
             {text: "odpoved 1"},
             {text: "odpoved 2"},           
@@ -36,6 +41,7 @@ const questions = [
     },
     {
         question: "Otazka cislo sest",
+        type: "buttons",
         answers: [
             {text: "odpoved 1"},
             {text: "odpoved 2"},           
@@ -43,6 +49,7 @@ const questions = [
     },
     {
         question: "Otazka cislo sedm",
+        type: "buttons",
         answers: [
             {text: "odpoved 1"},
             {text: "odpoved 2"},           
@@ -67,31 +74,49 @@ function startQuiz(){
 
 function showQuestion(){
     resetState();
+
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + 
-    currentQuestion.question; //1
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+  
+    if (currentQuestion.type === "buttons") {
+      answerButtons.style.display = "block";  // Pokud je otázka typu buttons, skryj select
+      const selectBox = document.querySelector('.select-box');
+      if (selectBox) {
+        selectBox.style.display = "none"; // Skrytí select boxu a šipky
+      }
 
-    currentQuestion.answers.forEach(answer => {
+      currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
-
-        if (selectedAnswers[currentQuestionIndex] === answer.text){
-            button.classList.add("active");
-        }
-
         answerButtons.appendChild(button);
         button.addEventListener("click", selectAnswer);
-         
-    });
+      });
+    } else if (currentQuestion.type === "select") {
+      const selectBox = document.createElement("select");
+      selectBox.classList.add("custom-select");
+      selectBox.innerHTML = `<option disabled selected>Vyber možnost</option>`;
 
+      currentQuestion.answers.forEach(answer => {
+        const option = document.createElement("option");
+        option.value = answer.text;
+        option.innerHTML = answer.text;
+        selectBox.appendChild(option);
+      });
+
+      answerButtons.appendChild(selectBox);
+      const selectContainer = document.querySelector('.select-box');
+      if (selectContainer) {
+        selectContainer.style.display = "block"; // Ukáže select box a šipku
+      }
+    }
 }
 
 function resetState(){
-    while (answerButtons.firstChild){
+    while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild);
-    }
+      }
 }
 
 function selectAnswer(e){
