@@ -55,9 +55,9 @@ body{
 
 .button-container {
     display: flex;
-    justify-content: space-between; /* Umístí tlačítka na opačné konce */
-    align-items: center; /* Zarovná tlačítka vertikálně na střed (pokud by měly různou výšku) */
-    padding: 0 0px; /* Přidá trochu místa kolem tlačítek */
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 0px; 
 }
 
 #next-btn {
@@ -113,7 +113,6 @@ body{
 }
 
 .select-box i{
-
     font-weight: 900;
     font-size: 18px;
     color: black;
