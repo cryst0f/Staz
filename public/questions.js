@@ -33,6 +33,7 @@ const questions = [
     },
 
     //na zaklade prvni otazky -> otazka na sluzbu x < 13 <= 15 <y
+    //Digitalni infrastruktura a sluzby
     {
         question: "Jakou službu poskytujete",
         type: "select",
@@ -330,12 +331,185 @@ const questions = [
                     }
                 }
             } // ma 2 special otazky, bez nich <50 nizsi ostatni vyssi, pokud plati 1 otazka vse vyssi, stejne u druhe
+
+            
         ],
+/////////////////////////////////////////////////////////////////////////////////
+        //Drazni doprava
+
+        question: "Jakou službu poskytujete",
+        type: "select",
+        dependsOn:{
+            questionIndex: 0,
+            value: "Drážní doprava"
+        },
+        answers: [
+            {text: "Provoz celostátní dráhy",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel celostátní dráhy podle zákona o drahách? ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    } 
+                }
+            }, //bez add nic, <250 nizsi, >250 vyssi
+
+            {text: "Provoz drážní dopravy na celostátní dráze",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatelem drážní dopravy na celostátní dráze zákona o dráhách přičemž provádíte přepravu osob, věcí či zvířat nebo poskytujete trakci?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            {text: "Provoz drážní dopravy na regionální dráze",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatelem drážní dopravy na celostátní dráze zákona o dráhách přičemž provádíte přepravu osob, věcí či zvířat nebo poskytujete trakci?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            {text: "Provoz drážní dopravy na veřejně přístupné dráze",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatelemdrážní dopravy na veřejné přístupné vlečce podle zákona o dráhách přičemž provádíte přepravu osob, věcí či zvířat nebo poskytujete trakci?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            {text: "Provoz regionální dráhy",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel regionální dráhy podle zákona o drahách?",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            {text: "Provoz veřejně přístupné vlečky",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel veřejně přístupné vlečkypodle zákona o dráhách?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            {text: "Provoz zařízení služeb",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel zařízení služeb podle zákona o dráhách?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            {text: "Stavění vlakových cest",value: 0,
+                nextQuestion:{
+                    question: "Jste subjekt poskytující službu stavění vlakových cest na celostátní úrovni?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 20},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    }
+                } 
+            }, // bez add nic, s add <250 nizsi, >250 vyssi
+
+            
+        ],
+
+                //Energetika - Elektrina
+        
+                question: "Jakou službu poskytujete",
+                type: "select",
+                dependsOn:{
+                    questionIndex: 0,
+                    value: "Energetika - Elektřina"
+                },
+                answers: [
+                    {text: "Obchod s elektřinou",value: 1,
+                        nextQuestion:{
+                            question: "Jste držitel licence na obchod s elektřinou podle energetického zákona? ",
+                            type: "buttons",
+                            answers: [
+                                {text: "Ano", value: 9},
+                                {text: "Ne", value: 0}
+                            ],
+                            evaluate: (answer, question) => {
+                                const selectedAnswer = question.answers.find(a => a.text === answer);
+                                return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                            } 
+                        }
+                    }, //ma 2 add, bez add nic, 
+        
+                ],
+
+
         evaluate: (answer, question) => {
             const selectedAnswer = question.answers.find(a => a.text === answer);
             return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
         }
+
+
+
+
+        
+
     },
+
+
+
+    
+
 
     //oddeleni druhych otazek
     {
