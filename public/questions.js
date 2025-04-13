@@ -32,7 +32,7 @@ const questions = [
         }
     },
 
-    //na zaklade prvni otazky -> otazka na sluzbu x < 13 <= 15 <y
+    //na zaklade prvni otazky -> otazka na sluzbu x <=11 <= 15 <y
     //Digitalni infrastruktura a sluzby
     {
         question: "Jakou službu poskytujete",
@@ -55,14 +55,14 @@ const questions = [
                         return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
                 }
             }
-            }, // bez add question nic, s add <250 nizsi, >250 vyssi
+            }, // bez add question nic, s add <250 nizsi, >250 nizsi
             
             {text: "Poskytování řízené bepečnostní služby", value: 1,
                 nextQuestion:{
                     question: "Jste poskytovatelem řízené bezpečnosti",
                     type: "buttons",
                     answers: [
-                        {text: "Ano", value: 8},
+                        {text: "Ano", value: 9},
                         {text: "Ne", value: 0}
                     ],
                     evaluate: (answer, question) => {
@@ -334,9 +334,10 @@ const questions = [
 
             
         ],
-/////////////////////////////////////////////////////////////////////////////////
-        //Drazni doprava
+    },
 
+    
+    { //Drazni doprava
         question: "Jakou službu poskytujete",
         type: "select",
         dependsOn:{
@@ -466,45 +467,226 @@ const questions = [
 
             
         ],
+    },
 
-                //Energetika - Elektrina
+    {                //Energetika - Elektrina
         
-                question: "Jakou službu poskytujete",
-                type: "select",
-                dependsOn:{
-                    questionIndex: 0,
-                    value: "Energetika - Elektřina"
-                },
-                answers: [
-                    {text: "Obchod s elektřinou",value: 1,
+        question: "Jakou službu poskytujete",
+        type: "select",
+        dependsOn:{
+            questionIndex: 0,
+            value: "Energetika - Elektřina"
+            },
+            answers: [
+                {text: "Obchod s elektřinou",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na obchod s elektřinou podle energetického zákona? ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
                         nextQuestion:{
-                            question: "Jste držitel licence na obchod s elektřinou podle energetického zákona? ",
+                            question: "Jaký je průměrný počet vašich odběrných a předávacích míst za poslední dostupný kalendářní rok? ",
                             type: "buttons",
                             answers: [
-                                {text: "Ano", value: 9},
-                                {text: "Ne", value: 0}
+                                {text: "50 000 a více", value: 20},
+                                {text: "Více než 10 000, ale méně než 50 000", value: 3},
+                                {text: "Méně než 10 000", value: 0}
                             ],
                             evaluate: (answer, question) => {
                                 const selectedAnswer = question.answers.find(a => a.text === answer);
                                 return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
-                            } 
+                            }
                         }
-                    }, //ma 2 add, bez add nic, 
-        
-                ],
+                    }
+                }, //ma 2 add, bez add nic, pokud 1 ano <250 nizsi a >250 vyssi, pokud 2 otazka samotna tak nic, pokud obe a druha je 10 000 tak stejne jak kdyz prvni
+                //pokud pokud ve 2 10-50 tak vse nizsi krome >250 a pokud 50 tak vsude vyssi
+
+                {text: "Provoz distribuční soustavy elektřiny",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na distribuci elektřiny podle energetického zákona? ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                        nextQuestion:{
+                            question: "Jaká je celková přenosová kapacita vaší ditribuční soustavy?  ",
+                            type: "buttons",
+                            answers: [
+                                {text: "220MW a více", value: 20},
+                                {text: "Více než 120MW, ale méně než 220 MW", value: 3},
+                                {text: "Méně než 120 MW", value: 0}
+                            ],
+                            evaluate: (answer, question) => {
+                                const selectedAnswer = question.answers.find(a => a.text === answer);
+                                return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                            }
+                        }
+                    }
+                },//ma 2 add, bez add nic, pokud 1 ano <250 nizsi a >250 vyssi, pokud 2 otazka samotna tak nic, pokud obe a druha je 10 000 tak stejne jak kdyz prvni
+                //pokud pokud ve 2 10-50 tak vse nizsi krome >250 a pokud 50 tak vsude vyssi
+
+                {text: "Provoz přenosové soustavy elektřiny",value: 0,
+                    nextQuestion:{
+                        question: "Jste držitel licence na přenos elektřiny podle energetického zákona?",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 20},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //bez add nic, s vyssi
+
+                {text: "Provoz veřejně přístupné dobíjecí stanice",value: 1,
+                    nextQuestion:{
+                        question: "Jste provozovatel veřejně přístupné dobíjecí stanice podle zákona o pohonných hmotách, který je odpovědný za správu a provoz dobíjecí stanice, která poskytuje službu dobíjení koncovým uživatelům, a to i jménem a na účet poskytovatele mobility?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+                {text: "Výkon činnosti agregace",value: 1,
+                    nextQuestion:{
+                        question: "Jste agregátor podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+                {text: "Výkon činnosti Elektroenergetického datového centra",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na činnost Elektroenergetického datového centra podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 20},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //pouze special question s ni vyssi,bez ni nic
+
+                {text: "Výkon činnosti nominovaného organizátora trhu s elektřinou",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na činnosti operátora trhu podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 20},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //pouze special question s ni vyssi,bez ni nic
+
+                {text: "Výkon činnosti odezvy strany poptávky",value: 1,
+                    nextQuestion:{
+                        question: "Jste provozovatel odezvy strany poptávky podle příslušného předpisu Evropské unie?   ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+                {text: "Výkon činnosti ukládání elektřiny",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na ukládání elektřiny podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        }
+                    } 
+                }, //bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
 
 
-        evaluate: (answer, question) => {
-            const selectedAnswer = question.answers.find(a => a.text === answer);
-            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
-        }
+                {text: "Výroba elektřiny",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na výrobu elektřiny podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                        nextQuestion:{
+                            question: "Jaká je celková přenosová kapacita vaší ditribuční soustavy?  ",
+                            type: "buttons",
+                            answers: [
+                                {text: "100MW a více", value: 20},
+                                {text: "Více než 50MW, ale méně než 100MW", value: 3},
+                                {text: "Méně než 50 MW", value: 0}
+                            ],
+                            evaluate: (answer, question) => {
+                                const selectedAnswer = question.answers.find(a => a.text === answer);
+                                return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                            }
+                        }
+                    }
+                },//ma 2 add, bez add nic, pokud 1 ano <250 nizsi a >250 vyssi, pokud 2 otazka samotna tak nic, pokud obe a druha je 10 000 tak stejne jak kdyz prvni
+                //pokud pokud ve 2 10-50 tak vse nizsi krome >250 a pokud 50 tak vsude vyssi
+                
+
+                
+
+                
+
+                
+
+    
+            ],
 
 
-
-
-        
-
-    },
+    evaluate: (answer, question) => {
+        const selectedAnswer = question.answers.find(a => a.text === answer);
+        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+    }
+},
 
 
 
