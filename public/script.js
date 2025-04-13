@@ -180,21 +180,34 @@ prevButton.addEventListener("click", handlePrevButton);
 function evaluateQuiz(questions, answers) {
     let totalScore = 0;
     const results = {};
+    let stopScoring = false;
 
     questions.forEach((question, index) => {
         const userAnswer = answers[index];
-        console.log("Otázka:", index, "Odpověď:", userAnswer); // Přidaný log
+        console.log("Otázka:", index, "Odpověď:", userAnswer);
+
+        // Vyhodnoť otázku bez ohledu na stopScoring
+        let evaluationResult = { points: 0 };
         if (question.evaluate && userAnswer !== null) {
-            const evaluationResult = question.evaluate(userAnswer, question);
-            results[`question${index + 1}`] = evaluationResult || {};
-            totalScore += evaluationResult?.points || 0;
-            console.log("Otázka:", index, "Body:", evaluationResult?.points); // Přidaný log
-        } else {
-            results[`question${index + 1}`] = { points: 0 };
+            evaluationResult = question.evaluate(userAnswer, question) || { points: 0 };
         }
+
+        results[`question${index + 1}`] = evaluationResult;
+
+        // Přičti body jen pokud ještě neskončilo skórování
+        if (!stopScoring) {
+            totalScore += evaluationResult.points || 0;
+        }
+
+        // Zastavit skórování pro další otázky?
+        if (question.stopScoringIf && userAnswer === question.stopScoringIf) {
+            stopScoring = true;
+        }
+
+        console.log("Otázka:", index, "Body:", evaluationResult.points);
     });
 
-    console.log("Celkové skóre:", totalScore); // Přidaný log
+    console.log("Celkové skóre:", totalScore);
     return { totalScore, results };
 }
 

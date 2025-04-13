@@ -670,15 +670,6 @@ const questions = [
                     }
                 },//ma 2 add, bez add nic, pokud 1 ano <250 nizsi a >250 vyssi, pokud 2 otazka samotna tak nic, pokud obe a druha je 10 000 tak stejne jak kdyz prvni
                 //pokud pokud ve 2 10-50 tak vse nizsi krome >250 a pokud 50 tak vsude vyssi
-                
-
-                
-
-                
-
-                
-
-    
             ],
 
 
@@ -688,7 +679,288 @@ const questions = [
     }
 },
 
+// Energetika - Plynarenstvi
+{
 
+    question: "Jakou službu poskytujete",
+        type: "select",
+        dependsOn:{
+            questionIndex: 0,
+            value: "Energetika - Plynárenství"
+            },
+            answers: [
+                {text: "Obchod s plynem",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na obchod s plynem podle energetického zákona?",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }
+                },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+                {text: "Provoz distribuční soustavy plynu",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na distribuci plynu podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }
+                },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+                {text: "Provoz přepravní soustavy plynu",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na přepravu plynu podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 20},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }
+                },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+                {text: "Uskladňování plynu",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence na uskladňování plynu podle energetického zákona? ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                        nextQuestion:{
+                            question: "Provozujete podzemní zásobník plynu s projektovanou instalovanou kapacitou nejméně 200 mil. m³?  ",
+                            type: "buttons",
+                            answers: [
+                                {text: "Ano", value: 6},
+                                {text: "Ne", value: 0}
+                            ],
+                            evaluate: (answer, question) => {
+                                const selectedAnswer = question.answers.find(a => a.text === answer);
+                                return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                            }
+                        }
+                    }
+                },// ma dve add questoins, bez nich nic, pokud plati prvni tak pro <250 nizsi a >250 vyssi
+                //pokud plati 2 tak nic, pokud plati obe vse vyssi 
+
+                {text: "Výroba plynu",value: 1,
+                    nextQuestion:{
+                        question: "Jste držitel licence sna výrobu plynu podle energetického zákona?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 9},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }
+                },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+            ],
+            evaluate: (answer, question) => {
+                const selectedAnswer = question.answers.find(a => a.text === answer);
+                return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+            }
+},
+
+//Energetika - Ropa a ropné produkty
+{
+    question: "Jakou službu poskytujete",
+    type: "select",
+    dependsOn:{
+        questionIndex: 0,
+        value: "Energetika - Ropa a ropné produkty"
+        },
+        answers: [
+            {text: "Provoz čerpací stanice pohonných hmot",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel čerpací stanice podle zákona o pohonných hmotách a provozujete alespoň 100 čerpacích stanic na území České republiky?  ",
+                    type: "buttons",
+                    stopScoringIf: "Ano",
+                    answers: [
+                        {text: "Ano", value: 13},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selected = question.answers.find(a => a.text === answer);
+                        return selected ? { points: selected.value } : { points: 0 };
+                    },
+                }
+            },//pouze special question bez ni nic, s ni nizsi
+
+            {text: "Provoz produktovodu",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel produktovodu?",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+            {text: "Provoz ropovodu",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel ropovodu? ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+            {text: "Provoz skladovacího zařízení",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel skladovacího zařízení pro skladování ropy?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 10},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },nextQuestion:{
+                        question: "Disponujete zásobníkem nebo komplexem zásobníků s celkovou kapacitou nejméně 40 000 m³?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 5},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }
+                }
+            },//ma 2 add questions, bez nich nic, s prvni pro <250 nizsi >250 vyssi, pokud plati jen 2 tak nic
+            //pokud plati obe tak vsechno vyssi
+
+            {text: "Těžba ropy",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel zařízení na těžbu ropy?",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },//bez add nic, s ni pro <250 nizsi pro >250 vyssi ostatni nic
+
+            {text: "Výkon činnosti ústředního správce zásob",value: 1,
+                nextQuestion:{
+                    question: "Jste ústřední správce zásob podle zákona o nouzových zásobách ropy?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 20},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },//bez add nic, s ni vsechno vyssi
+
+            {text: "Zpracování ropy",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel zařízení na zpracování ropy?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0}
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },//bez add nic, s ni vsechno vyssi            
+        ],
+        evaluate: (answer, question) => {
+            const selectedAnswer = question.answers.find(a => a.text === answer);
+            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+        }
+},
+
+//Energetika - teplarenstvi
+{
+    question: "Jakou službu poskytujete",
+    type: "select",
+    dependsOn:{
+        questionIndex: 0,
+        value: "Energetika - Teplárenství"
+        },
+        answers: [
+            {text: "Provoz soustavy zásobování tepelnou energií",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel čerpací stanice podle zákona o pohonných hmotách a provozujete alespoň 100 čerpacích stanic na území České republiky?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                    nextQuestion:{
+                        question: "Disponujete zásobníkem nebo komplexem zásobníků s celkovou kapacitou nejméně 40 000 m³?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 5},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }
+                }
+            },
+        ],
+        evaluate: (answer, question) => {
+            const selectedAnswer = question.answers.find(a => a.text === answer);
+            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+        }//2 add questions, bez nic, pokud prvni tak <250 nizsi a >250 vyssi, pokud plati jen 2 tak nic
+        //pokud plati obe vsechno vyssi
+
+},
 
     
 
