@@ -926,9 +926,86 @@ const questions = [
         value: "Energetika - Teplárenství"
         },
         answers: [
-            {text: "Provoz soustavy zásobování tepelnou energií",value: 1,
+            {text: "Provoz soustavy zásobování tepelnou energií ",value: 1,
                 nextQuestion:{
                     question: "Jste provozovatel čerpací stanice podle zákona o pohonných hmotách a provozujete alespoň 100 čerpacích stanic na území České republiky?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 10},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                    nextQuestion:{
+                        question: "Disponujete soustavou zásobování tepelnou energií s celkovou přenosovou kapacitou nejméně 160 MW?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 5},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                        
+                    }
+                }
+            },//2 add questions, bez nic, pokud prvni tak <250 nizsi a >250 vyssi, pokud plati jen 2 tak nic
+            //pokud plati obe vsechno vyssi
+
+            {text: "Výroba tepelné energie",value: 1,
+                nextQuestion:{
+                    question: "Jste držitel licence na výrobu tepelné energie podle energetického zákona?",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 10},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                    nextQuestion:{
+                        question: "Disponujete zdrojem tepelné energie s celkovým instalovaným tepelným výkonem nejméně 200 MW?  ",
+                        type: "buttons",
+                        answers: [
+                            {text: "Ano", value: 5},
+                            {text: "Ne", value: 0}
+                        ],
+                        evaluate: (answer, question) => {
+                            const selectedAnswer = question.answers.find(a => a.text === answer);
+                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                        },
+                    }   
+                }
+            },//2 add questions, bez nic, pokud prvni tak <250 nizsi a >250 vyssi, pokud plati jen 2 tak nic
+            //pokud plati obe vsechno vyssi
+            
+        ],
+        evaluate: (answer, question) => {
+            const selectedAnswer = question.answers.find(a => a.text === answer);
+            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+        }
+
+},
+
+
+//energetika - vodik
+{
+    question: "Jakou službu poskytujete",
+    type: "select",
+    dependsOn:{
+        questionIndex: 0,
+        value: "Energetika - Vodík"
+        },
+        answers: [
+            {text: "Přeprava vodíku",value: 1,
+                nextQuestion:{
+                    question: "Jste subjekt zajišťující přepravu vodíku?  ",
                     type: "buttons",
                     answers: [
                         {text: "Ano", value: 9},
@@ -939,28 +1016,125 @@ const questions = [
                         const selectedAnswer = question.answers.find(a => a.text === answer);
                         return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
                     },
-                    nextQuestion:{
-                        question: "Disponujete zásobníkem nebo komplexem zásobníků s celkovou kapacitou nejméně 40 000 m³?  ",
-                        type: "buttons",
-                        answers: [
-                            {text: "Ano", value: 5},
-                            {text: "Ne", value: 0}
-                        ],
-                        evaluate: (answer, question) => {
-                            const selectedAnswer = question.answers.find(a => a.text === answer);
-                            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
-                        },
-                    }
+                }
+            },// jedna add question, bez ni nic, s ni pro <250 nizsi a >250 vyssi
+
+            {text: "Skladování vodíku",value: 1,
+                nextQuestion:{
+                    question: "Jste subjekt zajišťující skladování vodíku?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },// jedna add question, bez ni nic, s ni pro <250 nizsi a >250 vyssi
+
+            {text: "Výroba vodíku",value: 1,
+                nextQuestion:{
+                    question: "Jste výrobce vodíku?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },// jedna add question, bez ni nic, s ni pro <250 nizsi a >250 vyssi
+        ],
+            evaluate: (answer, question) => {
+                const selectedAnswer = question.answers.find(a => a.text === answer);
+                return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+            }
+            
+},
+
+{
+    question: "Jakou službu poskytujete",
+    type: "select",
+    dependsOn:{
+        questionIndex: 0,
+        value: "Finanční trh"
+        },
+        answers: [
+            {text: "Provoz obchodního systému",value: 1,
+                nextQuestion:{
+                    question: "Jste provozovatel obchodního systému podle zákona o podnikání na kapitálovém trhu? ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 10},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },// ma jednu add questions,bez ni nic, s ni od <250 vyssi jinak nic
+
+            {text: "TODO",value: 1,
+                nextQuestion:{
+                    question: "Jste instituce elektronických peněz podle zákona o platebním styku?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 8},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
+                }
+            },// ma jednu add questions,bez ni nic, s ni od <250 vyssi jinak nic
+        ],
+        evaluate: (answer, question) => {
+            const selectedAnswer = question.answers.find(a => a.text === answer);
+            return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+        }
+},
+
+//templeate
+/*
+{
+    question: "Jakou službu poskytujete",
+    type: "select",
+    dependsOn:{
+        questionIndex: 0,
+        value: "Energetika - Vodík"
+        },
+        answers: [
+            {text: "Přeprava vodíku",value: 1,
+                nextQuestion:{
+                    question: "Jste subjekt zajišťující přepravu vodíku?  ",
+                    type: "buttons",
+                    answers: [
+                        {text: "Ano", value: 9},
+                        {text: "Ne", value: 0},
+                        
+                    ],
+                    evaluate: (answer, question) => {
+                        const selectedAnswer = question.answers.find(a => a.text === answer);
+                        return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
+                    },
                 }
             },
         ],
         evaluate: (answer, question) => {
             const selectedAnswer = question.answers.find(a => a.text === answer);
             return selectedAnswer ? { points: selectedAnswer.value } : { points: 0 };
-        }//2 add questions, bez nic, pokud prvni tak <250 nizsi a >250 vyssi, pokud plati jen 2 tak nic
-        //pokud plati obe vsechno vyssi
-
-},
+        }
+},*/
 
     
 
