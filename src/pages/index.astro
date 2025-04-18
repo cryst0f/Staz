@@ -1,5 +1,6 @@
 ---
 import '../styles/styles.css';
+
 ---
 
 <html lang="cs">
@@ -13,6 +14,7 @@ import '../styles/styles.css';
 </head>
 <body>
   <div class="app">
+    
   
   <h1>Kalkulacka</h1>
   <div class="calc">
@@ -34,7 +36,7 @@ import '../styles/styles.css';
     <p id="vysledek-regulace" style="font-size: 1.2em; font-weight: bold; color: navy; margin-bottom: 15px;"></p>
     <button id="restart-kviz" style="padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px;">Zkusit znovu</button>
   </div>
-  <script src="/questions.js" is:inline></script>
-  <script src="/script.js" is:inline></script>
+  <script type="module" src="/questions.js"></script>
+  <script type="module" src="/script.js"></script>
 </body>
 </html>
