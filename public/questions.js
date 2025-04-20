@@ -24,7 +24,7 @@ export const questions = [
             { text: "Vodní doprava"},
             { text: "Vodní hospodářství"},
             { text: "Vojenský průmysl"},
-            { text: "Vodní průmysl"},
+            { text: "Výrobní průmysl"},
             { text: "Zdravotnictví"}
       ]
     },
@@ -1989,7 +1989,7 @@ export const questions = [
                     },
 
                     {
-                        //Drazni doprava
+                        //Vojenský průmysl
                             question: "Jakou službu poskytujete",
                             type: "select",
                             id: "military-industry",
@@ -2023,6 +2023,105 @@ export const questions = [
                                     }
                                 },
                             ]
+                        },
+                        {
+                            //Výrobní průmysl
+                                question: "Jakou službu poskytujete",
+                                type: "select",
+                                id: "manufacturing-industry",
+                                dependsOn: { id: "industry", value: "Výrobní průmysl" },
+                                answers: [
+                        
+                                    {   
+                                        text: "Výroba elektrických zařízení",
+                                        id: "manufactureElectricalEquipment",
+                                        nextQuestion: {
+                                            question: "Jste výrobce elektrických zařízení ve smyslu oddílu 27 klasifikace CZ-NACE",
+                                            id: "manufactureElectricalEquipmentAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba motorových vozidel (kromě motocyklů), přívěsů a návěsů",
+                                        id: "manufactureMotorVehicles",
+                                        nextQuestion: {
+                                            question: "Jste výrobce motorových vozidel, přívěsů a návěsů ve smyslu oddílu 29 klasifikace CZ-NACE",
+                                            id: "manufactureMotorVehiclesAdd1",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano",
+                                                    nextQuestion: { 
+                                                        question: "Vyrábíte sériově osobní motorová vozidla",
+                                                        id: "manufactureMotorVehiclesAdd2",
+                                                        type: "buttons",
+                                                        answers: [
+                                                            { text: "Ano" },
+                                                            { text: "Ne" },
+                                                        ]
+                                                    }
+                                                 },
+                                                { text: "Ne",
+                                                    nextQuestion: { 
+                                                        question: "Vyrábíte sériově osobní motorová vozidla",
+                                                        id: "manufactureMotorVehiclesAdd2",
+                                                        type: "buttons",
+                                                        answers: [
+                                                            { text: "Ano" },
+                                                            { text: "Ne" },
+                                                        ]
+                                                    }
+                                                 }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba ostatních dopravních prostředků a zařízení",
+                                        id: "manufactureTransportVehicle",
+                                        nextQuestion: {
+                                            question: "Jste výrobce ostatních dopravních prostředků a zařízení ve smyslu oddílu 30 klasifikace CZ-NACE",
+                                            id: "manufactureTransportVehicleAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba počítačů, elektronických a optických přístrojů a zařízení",
+                                        id: "manufactureComputers",
+                                        nextQuestion: {
+                                            question: "Jste výrobce počítačů, elektronických a optických přístrojů a zařízení ve smyslu oddílu 26 klasifikace CZ-NACE",
+                                            id: "manufactureComputersAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba strojů a zařízení nezařazená pod jiné oddíly klasifikace CZ-NACE",
+                                        id: "manufactureMachinery",
+                                        nextQuestion: {
+                                            question: "Jste jinde nezařazený výrobce strojů a zařízení ve smyslu oddílu 28 klasifikace CZ-NACE",
+                                            id: "manufactureMachineryAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+                                ]
                         },
         
         
@@ -5338,6 +5437,136 @@ export const questions = [
         },
         "Ne": "Žádná regulace"
       },
+    },
+//Výrobní průmysl
+    "Výrobní průmysl": {
+      "Výroba elektrických zařízení": {
+        "Ano": {
+          employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          },
+          turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          }
+        },
+        "Ne": "Žádná regulace"
+      },
+    "Výroba motorových vozidel (kromě motocyklů), přívěsů a návěsů": {
+            "Ano": {
+                "Ano": { 
+                    employees: { 
+                    0: "Vyšší regulace", 
+                    1: "Vyšší regulace", 
+                    2: "Vyšší regulace", 
+                    3: "Vyšší regulace" },
+                    turnover: { 
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace", 
+                    2: "Vyšší regulace", 
+                    3: "Vyšší regulace" }
+                },
+                "Ne": { 
+                    employees: { 
+                    0: "Žádná regulace", 
+                    1: "Žádná regulace", 
+                    2: "Nižší regulace", 
+                    3: "Nižší regulace" },
+                    turnover: { 
+                    0: "Žádná regulace", 
+                    1: "Žádná regulace", 
+                    2: "Nižší regulace", 
+                    3: "Nižší regulace" }
+                }
+            },
+            "Ne": { 
+                "Ano": { 
+                    employees: { 
+                        0: "Žádná regulace", 
+                        1: "Žádná regulace", 
+                        2: "Žádná regulace", 
+                        3: "Žádná regulace" },
+                        turnover: { 
+                        0: "Žádná regulace", 
+                        1: "Žádná regulace", 
+                        2: "Žádná regulace", 
+                        3: "Žádná regulace" }
+                },
+                "Ne": {
+                    employees: { 
+                    0: "Žádná regulace", 
+                    1: "Žádná regulace", 
+                    2: "Žádná regulace", 
+                    3: "Žádná regulace" },
+                    turnover: { 
+                    0: "Žádná regulace", 
+                    1: "Žádná regulace", 
+                    2: "Žádná regulace", 
+                    3: "Žádná regulace" }
+            }
+        },
+    },
+
+
+    "Výroba ostatních dopravních prostředků a zařízení": {
+            "Ano": {
+          employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          },
+          turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          }
+        },
+        "Ne": "Žádná regulace"
+      },
+
+        "Výroba počítačů, elektronických a optických přístrojů a zařízení": {
+            "Ano": {
+          employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          },
+          turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          }
+        },
+        "Ne": "Žádná regulace"
+      },
+
+        "Výroba strojů a zařízení nezařazená pod jiné oddíly klasifikace CZ-NACE": {
+           "Ano": {
+          employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          },
+          turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+          }
+        },
+        "Ne": "Žádná regulace"
+      },
+    
     },
     
 
