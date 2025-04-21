@@ -4,39 +4,48 @@ import '../styles/styles.css';
 ---
 
 <html lang="cs">
-<head>
-  <meta charset="UTF-8">
-  <title>
-    Kalkulacka
-  </title>
-  <link rel="stylesheet"  href="styles.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-  <div class="app">
-    
-  
-  <h1>Kalkulacka</h1>
-  <div class="calc">
-    <h2 id="question">Otazka c.1</h2>
-    <div id="answer-buttons">
-    </div>
-    <div class="button-container">
-    <button id="prev-btn">Předchozí</button>
-    <button id="next-btn">Dalsi</button>
-    </div>
-    <div class="select-box">
-      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-    </div>
-    
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kalkulačka</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <div class="app">
+      <h1>Kalkulačka</h1>
 
-  <div id="vysledek-kvizu" style="display: none; margin-top: 30px; padding: 20px; border: 1px solid #aaa; border-radius: 5px; background-color: #f9f9f9;">
-    <h2>Výsledek</h2>
-    <p id="vysledek-regulace" style="font-size: 1.2em; font-weight: bold; color: navy; margin-bottom: 15px;"></p>
-    <button id="restart-kviz" style="padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px;">Zkusit znovu</button>
-  </div>
-  <script type="module" src="/questions.js"></script>
-  <script type="module" src="/script.js"></script>
-</body>
+      <div class="calc">
+        <h2 id="question">Otázka č. 1</h2>
+
+        <div id="answer-buttons"></div>
+
+        <div class="button-container">
+          <button id="prev-btn">Předchozí</button>
+          <button id="next-btn">Další</button>
+        </div>
+
+        <div class="select-box">
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Výsledek kvízu -->
+      <div id="quiz-result" class="result-box" style="display: none;">
+        <h2>Výsledek</h2>
+        <p id="result-regulation"></p>
+        <button id="restart-quiz">Zkusit znovu</button>
+
+        <!-- Kontaktní formulář můžeš přidat sem -->
+        <div id="kontaktni-formular" style="margin-top: 30px;">
+          <!-- Přidej formulář zde -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/questions.js"></script>
+    <script type="module" src="/script.js"></script>
+  </body>
 </html>

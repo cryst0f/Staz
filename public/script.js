@@ -8,38 +8,38 @@ const prevButton = document.getElementById("prev-btn");
 let currentQuestionIndex = 0;
 let selectedAnswers = {};
 let history = [0];
-let newQuestionAdded = false; // Nová proměnná
+let newQuestionAdded = false; 
 
-const vysledekKontejner = document.getElementById("vysledek-kvizu");
-const samotnyKviz = document.querySelector(".calc");
-const vysledekText = document.getElementById("vysledek-regulace");
-const restartButton = document.getElementById("restart-kviz");
+const resultConatiner = document.getElementById("quiz-result");
+const quizItself = document.querySelector(".calc");
+const resultText = document.getElementById("result-regulation");
+const restartButton = document.getElementById("restart-quiz");
 
-function zobrazVysledek(vysledek) {
-    if (vysledekKontejner && samotnyKviz && vysledekText) {
-        vysledekText.textContent = `Na základě vašich odpovědí se na vás vztahuje: ${vysledek}.`;
-        vysledekKontejner.style.display = "block";
-        samotnyKviz.style.display = "none";
+function showResult(result) {
+    if (resultConatiner && quizItself && resultText) {
+        resultText.textContent = `Budete pravděpodobně spadat podle zadaných kriterií mezi regulované služby v režimu: ${result}.`;
+        resultConatiner.style.display = "block";
+        quizItself.style.display = "none";
     } else {
         console.error("Nepodařilo se najít HTML elementy pro zobrazení výsledku.");
     }
 }
 
 
-function dokonciKviz() {
+function finishQuiz() {
     console.log("selectedAnswers při dokončení:", selectedAnswers);
-    const vysledek = evaluateQuiz(questions, selectedAnswers, evalRules);
-    zobrazVysledek(vysledek);
+    const result = evaluateQuiz(questions, selectedAnswers, evalRules);
+    showResult(result);
 }
 
 function startQuiz() {
     currentQuestionIndex = 0;
     history = [0];
     selectedAnswers = {};
-    nextButton.innerHTML = "Dalsi";
-    if (vysledekKontejner && samotnyKviz) {
-        vysledekKontejner.style.display = "none";
-        samotnyKviz.style.display = "block";
+    nextButton.innerHTML = "Další";
+    if (resultConatiner && quizItself) {
+        resultConatiner.style.display = "none";
+        quizItself.style.display = "block";
     }
 
     // Najdeme první otázku, která by se měla zobrazit (bere v úvahu i případné dependsOn na začátku)
@@ -76,7 +76,7 @@ function showQuestion() {
     }
 
     if (actualQuestionIndex === -1 || actualQuestionIndex >= questions.length) {
-        dokonciKviz();
+        finishQuiz();
         return;
     }
 
@@ -127,7 +127,7 @@ function showQuestion() {
     }
 
     prevButton.disabled = history.length <= 1;
-    nextButton.innerHTML = (displayedQuestionIndex + 1) === countDisplayedQuestions() ? "Dokončit" : "Dalsi";
+    nextButton.innerHTML = (displayedQuestionIndex + 1) === countDisplayedQuestions() ? "Dokončit" : "Další";
 
     console.log("--- SHOW QUESTION END (zobrazení otázky) ---");
 }
