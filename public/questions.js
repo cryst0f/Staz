@@ -2024,7 +2024,7 @@ export const questions = [
                                 },
                             ]
                         },
-                        {
+                        {//test
                             //Výrobní průmysl
                                 question: "Jakou službu poskytujete",
                                 type: "select",
@@ -2123,6 +2123,203 @@ export const questions = [
                                     },
                                 ]
                         },
+
+                        {
+                            //Drazni doprava
+                                question: "Jakou službu poskytujete",
+                                type: "select",
+                                id: "healthcare",
+                                dependsOn: { id: "industry", value: "Zdravotnictví" },
+                                answers: [
+                                    {   
+                                        text: "Poskytování zdravotní péče",
+                                        id: "healthcareProvision",
+                                        nextQuestion: {
+                                            question: "Jste organizační složka státu zřízená ústředním orgánem státní správy, jíž bylo uděleno oprávnění k poskytování zdravotní péče ve smyslu zákona o zdravotních službách",
+                                            id: "healthcareProvisionAdd1",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano",
+                                                    nextQuestion: { 
+                                                        question: "Disponoval jste v předchozích 3 kalendářních letech průměrně alespoň 270 lůžky akutní péče",
+                                                        id: "healthcareProvisionAdd2",
+                                                        type: "buttons",
+                                                        answers: [
+                                                            { text: "Ano",
+                                                                nextQuestion: { 
+                                                                    question: "Jste poskytovatel zdravotní péče podle zákona o zdravotních službách",
+                                                                    id: "healthcareProvisionAdd3",
+                                                                    type: "buttons",
+                                                                    answers: [
+                                                                        { text: "Ano" },
+                                                                        { text: "Ne" },
+                                                                    ]
+                                                                }
+                                                             },
+                                                            { text: "Ne",
+                                                                nextQuestion: { 
+                                                                    question: "Jste poskytovatel zdravotní péče podle zákona o zdravotních službách",
+                                                                    id: "healthcareProvisionAdd3",
+                                                                    type: "buttons",
+                                                                    answers: [
+                                                                        { text: "Ano" },
+                                                                        { text: "Ne" },
+                                                                    ]
+                                                                }
+                                                             },
+                                                        ]
+                                                    }
+                                                 },
+                                                { text: "Ne",
+                                                    nextQuestion: { 
+                                                        question: "Disponoval jste v předchozích 3 kalendářních letech průměrně alespoň 270 lůžky akutní péče",
+                                                        id: "healthcareProvisionAdd2",
+                                                        type: "buttons",
+                                                        answers: [
+                                                            { text: "Ano",
+                                                                nextQuestion: { 
+                                                                    question: "Jste poskytovatel zdravotní péče podle zákona o zdravotních službách",
+                                                                    id: "healthcareProvisionAdd3",
+                                                                    type: "buttons",
+                                                                    answers: [
+                                                                        { text: "Ano" },
+                                                                        { text: "Ne" },
+                                                                    ]
+                                                                }
+                                                             },
+                                                            { text: "Ne",
+                                                                nextQuestion: { 
+                                                                    question: "Jste poskytovatel zdravotní péče podle zákona o zdravotních službách",
+                                                                    id: "healthcareProvisionAdd3",
+                                                                    type: "buttons",
+                                                                    answers: [
+                                                                        { text: "Ano" },
+                                                                        { text: "Ne" },
+                                                                    ]
+                                                                }
+                                                             },
+                                                        ]
+                                                    }
+                                                 }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Poskytování zdravotnické záchranné služby",
+                                        id: "provisionEmergencyMedical",
+                                        nextQuestion: {
+                                            question: "Jste poskytovatel zdravotnické záchranné služby podle zákona o zdravotnické záchranné službě",
+                                            id: "provisionEmergencyMedicalAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výkon činnosti referenční laboratoře EU zahrnuté do sítě referenčních laboratoří pro oblast veřejného zdraví",
+                                        id: "performaceLaboratoryForPublicHeatlh",
+                                        nextQuestion: {
+                                            question: "Jste referenční laboratoř Evropské unie podle přímo použitelného předpisu Evropské unie zahrnutá do sítě referenčních laboratoří pro oblast veřejného zdraví",
+                                            id: "performaceLaboratoryForPublicHeatlhAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba diagnostických zdravotnických prostředků in vitro",
+                                        id: "productionDiagnosticMedicalDevices",
+                                        nextQuestion: {
+                                            question: "Jste výrobce diagnostických zdravotnických prostředků in vitro podle přímo použitelného předpisu Evropské unie",
+                                            id: "productionDiagnosticMedicalDevicesAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba léčivých látek",
+                                        id: "productionMedicalSubstances",
+                                        nextQuestion: {
+                                            question: "Jste výrobce léčivých látek podle zákona o léčivech",
+                                            id: "productionMedicalSubstancesAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba léčivých přípravků pro humánní použití s výjimkou výrobních operací v rozsahu certifikace šarží, sekundárního balení, chemické/fyzikální kontroly jakosti a dovozu léčivých přípravků",
+                                        id: "productionMedicalSubstancesWithException",
+                                        nextQuestion: {
+                                            question: "Jste výrobce léčivých přípravků pro humánní použití podle zákona o léčivech",
+                                            id: "productionMedicalSubstancesWithExceptionAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba zdravotnických prostředků",
+                                        id: "productionMedicalDevices",
+                                        nextQuestion: {
+                                            question: "Jste výrobce zdravotnických prostředků podle přímo použitelného předpisu Evropské unie",
+                                            id: "productionMedicalDevicesAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výroba zdravotnických prostředků považovaných za kriticky důležité v případě mimořádné situace v oblasti veřejného zdraví",
+                                        id: "productionMedicalDevicesForCriticalEvents",
+                                        nextQuestion: {
+                                            question: "Jste výrobce zdravotnických prostředků uvedených na seznamu kriticky důležitých zdravotnických prostředků při mimořádné situaci v oblasti veřejného zdraví podle přímo použitelného předpisu Evropské unie",
+                                            id: "productionMedicalDevicesForCriticalEventsAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    {   
+                                        text: "Výzkum a vývoj léčivých přípravků",
+                                        id: "researchAndDevelopmentMedical",
+                                        nextQuestion: {
+                                            question: "Jste zadavatel klinických hodnocení podle přímo použitelného předpisu Evropské unie",
+                                            id: "researchAndDevelopmentMedicalAdd",
+                                            type: "buttons",
+                                            answers: [
+                                                { text: "Ano" },
+                                                { text: "Ne" }
+                                            ]
+                                        }
+                                    },
+
+                                    
+                                ]
+                            },
         
         
 
@@ -5568,6 +5765,284 @@ export const questions = [
       },
     
     },
+
+    "Zdravotnictví": {
+    "Poskytování zdravotní péče": {
+    "Ano": { // Odpověď na první doplňující otázku (předpoklad)
+        "Ano": { // Odpověď na druhou doplňující otázku (předpoklad)
+            "Ano": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                },
+                turnover: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                }
+            },
+            "Ne": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                },
+                turnover: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                }
+            }
+        },
+        "Ne": { // Odpověď na druhou doplňující otázku (předpoklad)
+            "Ano": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                },
+                turnover: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                }
+            },
+            "Ne": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                },
+                turnover: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                }
+            }
+        }
+    },
+    "Ne": { // Odpověď na první doplňující otázku (předpoklad)
+        "Ano": { // Odpověď na druhou doplňující otázku (předpoklad)
+            "Ano": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                },
+                turnover: {
+                    0: "Vyšší regulace",
+                    1: "Vyšší regulace",
+                    2: "Vyšší regulace",
+                    3: "Vyšší regulace"
+                }
+            },
+            "Ne": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Žádná regulace",
+                    1: "Žádná regulace",
+                    2: "Žádná regulace",
+                    3: "Žádná regulace"
+                },
+                turnover: {
+                    0: "Žádná regulace",
+                    1: "Žádná regulace",
+                    2: "Žádná regulace",
+                    3: "Žádná regulace"
+                }
+            }
+        },
+        "Ne": { // Odpověď na druhou doplňující otázku (předpoklad)
+            "Ano": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Žádná regulace",
+                    1: "Žádná regulace",
+                    2: "Nižší regulace",
+                    3: "Vyšší regulace"
+                },
+                turnover: {
+                    0: "Žádná regulace",
+                    1: "Žádná regulace",
+                    2: "Nižší regulace",
+                    3: "Vyšší regulace"
+                }
+            },
+            "Ne": { // Odpověď na třetí doplňující otázku (předpoklad)
+                employees: {
+                    0: "Žádná regulace",
+                    1: "Žádná regulace",
+                    2: "Žádná regulace",
+                    3: "Žádná regulace"
+                },
+                turnover: {
+                    0: "Žádná regulace",
+                    1: "Žádná regulace",
+                    2: "Žádná regulace",
+                    3: "Žádná regulace"
+                }
+            }
+        }
+    }
+},
+
+"Poskytování zdravotnické záchranné služby": {
+    "Ano": { 
+        employees: {
+            0: "Vyšší regulace",
+            1: "Vyšší regulace",
+            2: "Vyšší regulace",
+            3: "Vyšší regulace"
+        },
+        turnover: {
+            0: "Vyšší regulace",
+            1: "Vyšší regulace",
+            2: "Vyšší regulace",
+            3: "Vyšší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výkon činnosti referenční laboratoře EU zahrnuté do sítě referenčních laboratoří pro oblast veřejného zdraví": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výroba diagnostických zdravotnických prostředků in vitro": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výroba léčivých látek": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výroba léčivých přípravků pro humánní použití s výjimkou výrobních operací v rozsahu certifikace šarží, sekundárního balení, chemické/fyzikální kontroly jakosti a dovozu léčivých přípravků": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výroba zdravotnických prostředků": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Nižší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výroba zdravotnických prostředků považovaných za kriticky důležité v případě mimořádné situace v oblasti veřejného zdraví": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+"Výzkum a vývoj léčivých přípravků": {
+    "Ano": { 
+        employees: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        },
+        turnover: {
+            0: "Žádná regulace",
+            1: "Žádná regulace",
+            2: "Nižší regulace",
+            3: "Vyšší regulace"
+        }
+    },
+    "Ne": "Žádná regulace" 
+},
+
+
+
+
+
+}
     
 
 
