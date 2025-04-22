@@ -1,4 +1,5 @@
-import { questions, evalRules } from './questions.js';
+import { questions } from './questions.js';
+import { evalRules } from './evalRules.js';
 
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
@@ -8,17 +9,16 @@ const prevButton = document.getElementById("prev-btn");
 let currentQuestionIndex = 0;
 let selectedAnswers = {};
 let history = [0];
-let newQuestionAdded = false; 
 
-const resultConatiner = document.getElementById("quiz-result");
+const resultContainer = document.getElementById("quiz-result");
 const quizItself = document.querySelector(".calc");
 const resultText = document.getElementById("result-regulation");
 const restartButton = document.getElementById("restart-quiz");
 
 function showResult(result) {
-    if (resultConatiner && quizItself && resultText) {
+    if (resultContainer && quizItself && resultText) {
         resultText.textContent = `Budete pravděpodobně spadat podle zadaných kriterií mezi regulované služby v režimu: ${result}.`;
-        resultConatiner.style.display = "block";
+        resultContainer.style.display = "block";
         quizItself.style.display = "none";
     } else {
         console.error("Nepodařilo se najít HTML elementy pro zobrazení výsledku.");
@@ -37,8 +37,8 @@ function startQuiz() {
     history = [0];
     selectedAnswers = {};
     nextButton.innerHTML = "Další";
-    if (resultConatiner && quizItself) {
-        resultConatiner.style.display = "none";
+    if (resultContainer && quizItself) {
+        resultContainer.style.display = "none";
         quizItself.style.display = "block";
     }
 
@@ -326,16 +326,6 @@ const service = serviceQuestion ? answers[serviceQuestion.id] : null;
     return result;
 }
 
-
-
-
-
-
-function selectAnswer(event) {
-    const selectedBtn = event.target;
-    const currentQuestion = questions[currentQuestionIndex];
-    selectedAnswers[currentQuestion.id] = selectedBtn.innerHTML;
-}
 
 if (restartButton) {
     restartButton.addEventListener("click", startQuiz);

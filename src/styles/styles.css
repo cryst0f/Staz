@@ -12,18 +12,19 @@ body{
 .app{
     background: rgb(74, 230, 113);
     width: 90%;
-    max-width: 600px;
+    max-width: 900px;
     margin: 100px auto 0;
     border-radius: 10px;
     padding: 30px;
 }
 
 .app h1{
-    font-size: 25px;
+    font-size: 22px;
     color: black;
     font-weight: 600;
     border-bottom: 1px solid #333;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
+    
 }
 
 .calc{
@@ -31,7 +32,8 @@ body{
 }
 
 .calc h2{
-    font-size: 18px;
+    font-size: 22px;
+    padding-bottom: 10px;
 }
 
 .btn{
@@ -46,6 +48,7 @@ body{
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s;
+    border: 1px solid black;
 }
 
 .btn:hover{
@@ -69,7 +72,8 @@ body{
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 20px; 
+    margin-top: 30px; 
+    border: 1px solid black;
 }
 
 #prev-btn {
@@ -81,7 +85,8 @@ body{
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 30px;
+    border: 1px solid black;
 }
 
 .btn.active{
@@ -93,14 +98,14 @@ body{
     position: relative;
     background-color: white;
     width: 100%;
-    padding: 16px 30px 16ox 85px;
     border-radius: 4px;
     font: 400 22px 'Poppins', sans-serif;
     -webkit-appearance: none;
     appearance: none;
     color: black;
     border: 1px solid black;
-    padding-left: 5px;
+    padding-left: 5px; 
+    top: 5px
 }
 
 .custom-select::-ms-expand{
@@ -112,13 +117,21 @@ body{
     box-shadow: 0 0 10 -1px black;
 }
 
+.select-box{
+    position: relative;
+}
+
 .select-box i{
     font-weight: 900;
     font-size: 18px;
     color: black;
-    margin-left: 510px;  
-    transform: translateY(-81px); 
-    visibility: hidden;
+    position: absolute;
+    top: -88px; 
+    right: 10px;
+    transform: translateY(0); 
+    pointer-events: none;
+    visibility: visible; 
+    margin-left: 0;
 }
 
 .custom-select-box select:focus+i{
@@ -136,9 +149,9 @@ body{
 .result-box {
     margin-top: 30px;
     padding: 20px;
-    border: 1px solid #aaa;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color:  rgb(74, 230, 113);
+    text-align: center;
   }
   
   .result-box h2 {
@@ -148,19 +161,97 @@ body{
   #result-regulation {
     font-size: 1.2em;
     font-weight: bold;
-    color: navy;
+    color: black;
     margin-bottom: 15px;
   }
   
   #restart-quiz {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 200px;
+    margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
     border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
   }
 
+  body {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+.section {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+
+.contact-section {
+    margin-top: 50px;
+    width: 90%;
+    max-width: 900px;
+    background-color: rgb(74, 230, 113)
+}
+
+.contact-section input,
+.contact-section textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    border: 1px solid black;
+}
+
+.contact-section button {
+    background-color: white;
+    color: black;
+    font-weight: 500;
+    width: 200px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid black;
+    display: block;
+    margin-left: auto;
+}
+
+
+
+.contact-section .email-info-top {
+    margin-top: 10px; 
+    margin-bottom: 20px; 
+    font-size: 0.9em;
+    color: black;
+
+}
+
+/* Článek - zelené pozadí */
+.article-section {
+    margin-top: 50px;
+    width: 90%;
+    max-width: 900px;
+    background-color: rgb(74, 230, 113); 
+    color: black; 
+}
+
+.article-section p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
   
 
 
