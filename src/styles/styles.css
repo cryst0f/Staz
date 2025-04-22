@@ -58,9 +58,9 @@ body{
 
 .button-container {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    padding: 0 0px; 
+    gap: 20px;
 }
 
 #next-btn {
@@ -74,6 +74,7 @@ body{
     cursor: pointer;
     margin-top: 30px; 
     border: 1px solid black;
+    transition: background-color 0.3s ease;
 }
 
 #prev-btn {
@@ -87,11 +88,20 @@ body{
     cursor: pointer;
     margin-top: 30px;
     border: 1px solid black;
+    transition: background-color 0.3s ease;
 }
 
+#next-btn:hover,
+#prev-btn:hover,
+#restart-quiz:hover,
+.contact-section button:hover {
+    background-color: #e0e0e0; 
+}
+
+
 .btn.active{
-    background-color: black;
-    color: white;
+    background-color: #c5c4c4; /* světle šedá */
+    
 }
 
 .custom-select{
@@ -178,11 +188,11 @@ body{
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
+    transition: background-color 0.3s ease;
   }
 
   body {
     background-color: #fff;
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 40px;
 }
@@ -227,6 +237,7 @@ body{
     border: 1px solid black;
     display: block;
     margin-left: auto;
+    transition: background-color 0.3s ease;
 }
 
 
@@ -239,7 +250,7 @@ body{
 
 }
 
-/* Článek - zelené pozadí */
+
 .article-section {
     margin-top: 50px;
     width: 90%;
