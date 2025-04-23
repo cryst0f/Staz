@@ -264,5 +264,19 @@ body{
     line-height: 1.6;
 }
   
+.image-container {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+  
+  .centered-image {
+    max-width: 100%; 
+    height: auto; 
+}
+.image-container:first-of-type .centered-image {
+    margin-left: -4px; /* Posune obrázek o 3 pixely doleva */
+  }
+  
+  
 
 

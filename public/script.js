@@ -2,6 +2,7 @@ import { questions } from './questions.js';
 import { evalRules } from './evalRules.js';
 
 
+
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
@@ -10,8 +11,9 @@ const resultContainer = document.getElementById("quiz-result");
 const quizItself = document.querySelector(".calc");
 const resultText = document.getElementById("result-regulation");
 const restartButton = document.getElementById("restart-quiz");
+const originalQuestions = [...questions]; 
 
-
+let currentQuestions = [...originalQuestions]; 
 let currentQuestionIndex = 0;
 let selectedAnswers = {};
 let history = [0];
@@ -27,12 +29,13 @@ function showResult(result) {
 
 // Funkce pro dokonceni kvizu
 function finishQuiz() {
-    const result = evaluateQuiz(questions, selectedAnswers, evalRules);
+    const result = evaluateQuiz(currentQuestions, selectedAnswers, evalRules);
     showResult(result);
 }
 
 // Funkce pro spusteni kvizu
 function startQuiz() {
+    currentQuestions = [...originalQuestions];
     currentQuestionIndex = 0;
     history = [0];
     selectedAnswers = {};
@@ -42,8 +45,9 @@ function startQuiz() {
         quizItself.style.display = "block";
     }
 
-    while (currentQuestionIndex < questions.length && questions[currentQuestionIndex].dependsOn) {
-        const { id, value } = questions[currentQuestionIndex].dependsOn;
+
+    while (currentQuestionIndex < currentQuestions.length && currentQuestions[currentQuestionIndex].dependsOn) {
+        const { id, value } = currentQuestions[currentQuestionIndex].dependsOn;
         if (!selectedAnswers[id] || selectedAnswers[id] !== value) {
             currentQuestionIndex++;
         } else {
@@ -58,8 +62,8 @@ function startQuiz() {
 function getCurrentQuestion() {
     let displayedQuestionIndex = 0;
     let actualQuestionIndex = -1;
-    for (let i = 0; i < questions.length; i++) {
-        const q = questions[i];
+    for (let i = 0; i < currentQuestions.length; i++) {
+        const q = currentQuestions[i];
         const shouldDisplay = !q.dependsOn || (selectedAnswers[q.dependsOn.id] === q.dependsOn.value);
         if (shouldDisplay) {
             if (displayedQuestionIndex === history.length - 1) {
@@ -69,7 +73,7 @@ function getCurrentQuestion() {
             displayedQuestionIndex++;
         }
     }
-    return actualQuestionIndex === -1 || actualQuestionIndex >= questions.length ? null : questions[actualQuestionIndex];
+    return actualQuestionIndex === -1 || actualQuestionIndex >= currentQuestions.length ? null : currentQuestions[actualQuestionIndex];
 }
 
 // Funkce pro vykresleni tlacitek pro odpovedi
@@ -127,7 +131,7 @@ function showQuestion() {
     }
 
     questionElement.innerHTML = (history.length) + ". " + currentQuestion.question;
-    currentQuestionIndex = questions.indexOf(currentQuestion);
+    currentQuestionIndex = currentQuestions.indexOf(currentQuestion);
 
     if (currentQuestion.type === "buttons") {
         renderButtons(currentQuestion.answers, currentQuestion);
@@ -141,7 +145,7 @@ function showQuestion() {
 
 // Funkce pro pocet zobrazenych otazek
 function countDisplayedQuestions() {
-    return questions.filter(q => !q.dependsOn || (selectedAnswers[q.dependsOn.id] === q.dependsOn.value)).length;
+    return currentQuestions.filter(q => !q.dependsOn || (selectedAnswers[q.dependsOn.id] === q.dependsOn.value)).length;
 }
 
 // Funkce pro resetovani stavu (odstraneni predchozich odpovedi)
@@ -153,15 +157,15 @@ function resetState() {
 
 // Funkce pro zpracovani zavislych otazek
 function tryToInjectDependentQuestions() {
-    collectAllQuestions(questions).forEach((q) => {
-        const alreadyIn = questions.some(existing => existing.id === q.id);
+    collectAllQuestions(originalQuestions).forEach((q) => {
+        const alreadyIn = currentQuestions.some(existing => existing.id === q.id);
         if (alreadyIn || !q.dependsOn) return;
 
         const selectedValue = selectedAnswers[q.dependsOn.id];
         if (selectedValue === q.dependsOn.value) {
-            const exists = questions.some(existing => existing.id === q.id);
+            const exists = currentQuestions.some(existing => existing.id === q.id);
             if (!exists) {
-                questions.splice(currentQuestionIndex + 1, 0, q);
+                currentQuestions.splice(currentQuestionIndex + 1, 0, q);
             }
         }
     });
@@ -169,7 +173,7 @@ function tryToInjectDependentQuestions() {
 
 // Funkce pro tlacitko "Dalsi"
 function handleNextButton() {
-    const currentQuestion = questions[currentQuestionIndex];
+    const currentQuestion = currentQuestions[currentQuestionIndex];
     let selectedAnswerText = null;
 
     if (currentQuestion.type === "buttons") {
@@ -186,8 +190,8 @@ function handleNextButton() {
         const selectedAnswerObject = currentQuestion.answers.find(a => a.text === selectedAnswerText);
         const nextQ = selectedAnswerObject?.nextQuestion;
         if (nextQ) {
-            const exists = questions.some(q => q.id === nextQ.id);
-            if (!exists) questions.splice(currentQuestionIndex + 1, 0, nextQ);
+            const exists = currentQuestions.some(q => q.id === nextQ.id);
+            if (!exists) currentQuestions.splice(currentQuestionIndex + 1, 0, nextQ);
         }
 
         tryToInjectDependentQuestions();
@@ -208,7 +212,7 @@ function handlePrevButton() {
 
 // Funkce pro ziskani hodnoty odpovedi
 function getAnswerValue(questionId, answers, questions) {
-    const question = questions.find(q => q.id === questionId);
+    const question = currentQuestions.find(q => q.id === questionId);
     return question ? question.answers.find(a => a.text === answers[questionId])?.value : undefined;
 }
 
@@ -223,11 +227,11 @@ function evaluateRuleForBranch(ruleBranch, answers, employeeValue, revenueValue)
 // Funkce pro vyhodnoceni kvizu
 function evaluateQuiz(questions, answers, evalRules) {
     const sector = answers["industry"];
-    const serviceQuestion = questions.find(q => q.dependsOn?.id === 'industry' && q.dependsOn.value === sector);
+    const serviceQuestion = currentQuestions.find(q => q.dependsOn?.id === 'industry' && q.dependsOn.value === sector);
     const service = serviceQuestion ? answers[serviceQuestion.id] : null;
 
-    const employeeValue = getAnswerValue("employee", answers, questions);
-    const revenueValue = getAnswerValue("revenue", answers, questions);
+    const employeeValue = getAnswerValue("employee", answers, currentQuestions);
+    const revenueValue = getAnswerValue("revenue", answers, currentQuestions);
 
     let result = "Nelze určit regulaci";
 
@@ -235,7 +239,7 @@ function evaluateQuiz(questions, answers, evalRules) {
         let ruleBranch = evalRules[sector][service];
         const knownIds = ["industry", "employee", "revenue", serviceQuestion?.id];
 
-        const detailQuestions = questions
+        const detailQuestions = currentQuestions
             .filter(q => !knownIds.includes(q.id) && answers[q.id] !== undefined)
             .sort((a, b) => a.order - b.order);
 

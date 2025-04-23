@@ -1553,6 +1553,7 @@ export const evalRules = {
           },
         },
         Ne: {
+        employees: {
           0: 'Žádná regulace',
           1: 'Žádná regulace',
           2: 'Žádná regulace',
@@ -1596,6 +1597,8 @@ export const evalRules = {
         },
       },
     },
+  },
+  
 
     'Výkon činnosti platební instituce': {
       Ano: {
@@ -1614,6 +1617,7 @@ export const evalRules = {
           },
         },
         Ne: {
+          employees: {
           0: 'Žádná regulace',
           1: 'Žádná regulace',
           2: 'Žádná regulace',
@@ -1657,6 +1661,7 @@ export const evalRules = {
         },
       },
     },
+  },
 
     'Výkon činnosti ústřední protistrany': {
       Ano: {
@@ -1695,186 +1700,6 @@ export const evalRules = {
     },
   },
 
-  'Finanční trh': {
-    'Provoz obchodního systému': {
-      Ano: {
-        employees: {
-          0: 'Žádná regulace',
-          1: 'Žádná regulace',
-          2: 'Vyšších povinností',
-          3: 'Vyšších povinností',
-        },
-        turnover: {
-          0: 'Žádná regulace',
-          1: 'Žádná regulace',
-          2: 'Vyšších povinností',
-          3: 'Vyšších povinností',
-        },
-      },
-      Ne: 'Žádná regulace',
-    },
-
-    'Výkon činnosti instituce elektronických peněz': {
-      Ano: {
-        Ano: {
-          employees: {
-            0: 'Vyšších povinností',
-            1: 'Vyšších povinností',
-            2: 'Vyšších povinností',
-            3: 'Vyšších povinností',
-          },
-          turnover: {
-            0: 'Vyšších povinností',
-            1: 'Vyšších povinností',
-            2: 'Vyšších povinností',
-            3: 'Vyšších povinností',
-          },
-        },
-        Ne: {
-          employees: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-          turnover: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-        },
-      },
-      Ne: {
-        Ano: {
-          employees: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-          turnover: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-        },
-        Ne: {
-          employees: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-          turnover: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-        },
-      },
-    },
-
-    'Výkon činnosti platební instituce': {
-      Ano: {
-        Ano: {
-          employees: {
-            0: 'Vyšších povinností',
-            1: 'Vyšších povinností',
-            2: 'Vyšších povinností',
-            3: 'Vyšších povinností',
-          },
-          turnover: {
-            0: 'Vyšších povinností',
-            1: 'Vyšších povinností',
-            2: 'Vyšších povinností',
-            3: 'Vyšších povinností',
-          },
-        },
-        Ne: {
-          employees: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-          turnover: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-        },
-      },
-      Ne: {
-        Ano: {
-          employees: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-          turnover: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-        },
-        Ne: {
-          employees: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-          turnover: {
-            0: 'Žádná regulace',
-            1: 'Žádná regulace',
-            2: 'Žádná regulace',
-            3: 'Žádná regulace',
-          },
-        },
-      },
-    },
-  },
-  'Výkon činnosti ústřední protistrany': {
-    Ano: {
-      employees: {
-        0: 'Žádná regulace',
-        1: 'Žádná regulace',
-        2: 'Vyšších povinností',
-        3: 'Vyšších povinností',
-      },
-      turnover: {
-        0: 'Žádná regulace',
-        1: 'Žádná regulace',
-        2: 'Vyšších povinností',
-        3: 'Vyšších povinností',
-      },
-    },
-    Ne: 'Žádná regulace',
-  },
-
-  'Výkon činnosti úvěrové instituce': {
-    Ano: {
-      employees: {
-        0: 'Žádná regulace',
-        1: 'Žádná regulace',
-        2: 'Vyšších povinností',
-        3: 'Vyšších povinností',
-      },
-      turnover: {
-        0: 'Žádná regulace',
-        1: 'Žádná regulace',
-        2: 'Vyšších povinností',
-        3: 'Vyšších povinností',
-      },
-    },
-    Ne: 'Žádná regulace',
-  },
 //Chemický průmysl
   'Chemický průmysl': {
     'Distribuce chemických látek podléhajících registraci': {

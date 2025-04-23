@@ -18,7 +18,7 @@ import '../styles/styles.css';
       <h1>Kalkulačka</h1>
 
       <div class="calc">
-        <h2 id="question">Otázka č. 1</h2>
+        <h2 id="question"></h2>
 
         <div id="answer-buttons"></div>
 
@@ -35,8 +35,7 @@ import '../styles/styles.css';
       <div id="quiz-result" class="result-box" style="display: none;">
         <h2>Výsledek</h2>
         <p id="result-regulation"></p>
-        <button id="restart-quiz">Zkusit znovu</button>
-
+        <button id="restart-quiz">Zpět na začátek</button>
         </div>
       </div>
       <div class="section contact-section">
@@ -50,7 +49,7 @@ import '../styles/styles.css';
           <input type="text" id="prijmeni" name="prijmeni" required><br><br>
   
           <label for="spolecnost">Název společnosti:</label><br>
-          <input type="text" id="spolecnost" name="spolecnost"><br><br>
+          <input type="text" id="spolecnost" name="spolecnost" required><br><br>
   
           <label for="email">E-mail:</label><br>
           <input type="email" id="email" name="email" required><br><br>
@@ -74,7 +73,12 @@ import '../styles/styles.css';
           středními a velkými podniky. Regulace zavádí dva režimy povinností: režim s nižšími a vyššími požadavky. 
           Každá organizace musí samostatně posoudit, do kterého režimu spadá. Pro zjištění, zda vaše organizace podléhá těmto režimům, můžete využít naší kalkulačku.
         </p>
-        
+        <h2>Režim vyšších vs. nižších povinností</h2>
+        <p>
+          Nový zákon o kybernetické bezpečnosti rozlišuje dva režimy regulace – režim vyšších povinností a režim nižších povinností. 
+          Tyto režimy zavádějí bezpečnostní požadavky pro organizace v závislosti na jejich významu a míře rizika. Režim nižších povinností je mírnější a stanovuje méně náročná pravidla, aby organizace nebyly zatěžovány více, než je nezbytně nutné. Opatření vycházejí z článků 20 a 21 směrnice NIS2, avšak ve zjednodušené podobě. Režim vyšších povinností naopak zavádí komplexnější a přísnější opatření – klade důraz na řízení rizik, dokumentaci a kontrolní mechanismy. Vychází z dosavadní vyhlášky č. 82/2018 Sb. o kybernetické bezpečnosti, s drobnými úpravami.
+          Oba režimy stanovují bezpečnostní pravidla, která musí organizace dodržovat – a my vám s jejich naplněním rádi pomůžeme.
+        </p>      
       </div>
     </div>
 
