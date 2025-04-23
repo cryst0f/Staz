@@ -225,7 +225,7 @@ function evaluateRuleForBranch(ruleBranch, answers, employeeValue, revenueValue)
 }
 
 // Funkce pro vyhodnoceni kvizu
-function evaluateQuiz(questions, answers, evalRules) {
+function evaluateQuiz(currentQuestions, answers, evalRules) {
     const sector = answers["industry"];
     const serviceQuestion = currentQuestions.find(q => q.dependsOn?.id === 'industry' && q.dependsOn.value === sector);
     const service = serviceQuestion ? answers[serviceQuestion.id] : null;
