@@ -1,8 +1,7 @@
-// Importy
 import { questions } from './questions.js';
 import { evalRules } from './evalRules.js';
 
-// DOM elementy
+
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
@@ -12,12 +11,12 @@ const quizItself = document.querySelector(".calc");
 const resultText = document.getElementById("result-regulation");
 const restartButton = document.getElementById("restart-quiz");
 
-// Globální proměnné
+
 let currentQuestionIndex = 0;
 let selectedAnswers = {};
 let history = [0];
 
-// Funkce pro zobrazení výsledku
+// Funkce pro zobrazeni vysledku
 function showResult(result) {
     if (resultContainer && quizItself && resultText) {
         resultText.textContent = `Budete pravděpodobně spadat podle zadaných kriterií mezi regulované služby v režimu: ${result}.`;
@@ -26,13 +25,13 @@ function showResult(result) {
     }
 }
 
-// Funkce pro dokončení kvízu
+// Funkce pro dokonceni kvizu
 function finishQuiz() {
     const result = evaluateQuiz(questions, selectedAnswers, evalRules);
     showResult(result);
 }
 
-// Funkce pro spuštění kvízu
+// Funkce pro spusteni kvizu
 function startQuiz() {
     currentQuestionIndex = 0;
     history = [0];
@@ -55,7 +54,7 @@ function startQuiz() {
     showQuestion();
 }
 
-// Funkce pro získání aktuální otázky
+// Funkce pro ziskani aktualni otazky
 function getCurrentQuestion() {
     let displayedQuestionIndex = 0;
     let actualQuestionIndex = -1;
@@ -73,7 +72,7 @@ function getCurrentQuestion() {
     return actualQuestionIndex === -1 || actualQuestionIndex >= questions.length ? null : questions[actualQuestionIndex];
 }
 
-// Funkce pro vykreslení tlačítek pro odpovědi
+// Funkce pro vykresleni tlacitek pro odpovedi
 function renderButtons(answers, currentQuestion) {
     answerButtons.style.display = "block";
     const selectBox = document.querySelector('.select-box');
@@ -93,7 +92,7 @@ function renderButtons(answers, currentQuestion) {
     });
 }
 
-// Funkce pro vykreslení select boxu
+// Funkce pro vykresleni select boxu
 function renderSelect(answers, currentQuestion) {
     const selectBox = document.createElement("select");
     selectBox.classList.add("custom-select");
@@ -116,7 +115,7 @@ function renderSelect(answers, currentQuestion) {
     }
 }
 
-// Funkce pro zobrazení otázky
+// Funkce pro zobrazeni otazky
 function showQuestion() {
     resetState();
 
@@ -140,19 +139,19 @@ function showQuestion() {
     nextButton.innerHTML = (history.length) === countDisplayedQuestions() ? "Dokončit" : "Další";
 }
 
-// Funkce pro počet zobrazených otázek
+// Funkce pro pocet zobrazenych otazek
 function countDisplayedQuestions() {
     return questions.filter(q => !q.dependsOn || (selectedAnswers[q.dependsOn.id] === q.dependsOn.value)).length;
 }
 
-// Funkce pro resetování stavu (odstranění předchozích odpovědí)
+// Funkce pro resetovani stavu (odstraneni predchozich odpovedi)
 function resetState() {
     while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild);
     }
 }
 
-// Funkce pro zpracování závislých otázek
+// Funkce pro zpracovani zavislych otazek
 function tryToInjectDependentQuestions() {
     collectAllQuestions(questions).forEach((q) => {
         const alreadyIn = questions.some(existing => existing.id === q.id);
@@ -168,7 +167,7 @@ function tryToInjectDependentQuestions() {
     });
 }
 
-// Funkce pro tlačítko "Další"
+// Funkce pro tlacitko "Dalsi"
 function handleNextButton() {
     const currentQuestion = questions[currentQuestionIndex];
     let selectedAnswerText = null;
@@ -198,7 +197,7 @@ function handleNextButton() {
     }
 }
 
-// Funkce pro tlačítko "Předchozí"
+// Funkce pro tlacitko "Predchozi"
 function handlePrevButton() {
     if (history.length > 1) {
         history.pop();
@@ -207,13 +206,13 @@ function handlePrevButton() {
     }
 }
 
-// Funkce pro získání hodnoty odpovědi
+// Funkce pro ziskani hodnoty odpovedi
 function getAnswerValue(questionId, answers, questions) {
     const question = questions.find(q => q.id === questionId);
     return question ? question.answers.find(a => a.text === answers[questionId])?.value : undefined;
 }
 
-// Funkce pro vyhodnocení pravidla pro větev
+// Funkce pro vyhodnoceni pravidla pro vetev
 function evaluateRuleForBranch(ruleBranch, answers, employeeValue, revenueValue) {
     if (ruleBranch?.employees || ruleBranch?.turnover) {
         return ruleBranch.employees?.[employeeValue] || ruleBranch.turnover?.[revenueValue];
@@ -221,7 +220,7 @@ function evaluateRuleForBranch(ruleBranch, answers, employeeValue, revenueValue)
     return typeof ruleBranch === 'string' ? ruleBranch : null;
 }
 
-// Funkce pro vyhodnocení kvízu
+// Funkce pro vyhodnoceni kvizu
 function evaluateQuiz(questions, answers, evalRules) {
     const sector = answers["industry"];
     const serviceQuestion = questions.find(q => q.dependsOn?.id === 'industry' && q.dependsOn.value === sector);
@@ -253,7 +252,7 @@ function evaluateQuiz(questions, answers, evalRules) {
     return result;
 }
 
-// Funkce pro sběr všech otázek
+// Funkce pro sber vsech otazek
 function collectAllQuestions(questionsList) {
     const result = [];
 
@@ -271,7 +270,7 @@ function collectAllQuestions(questionsList) {
     return result;
 }
 
-// Event listenery pro tlačítka
+
 nextButton.addEventListener("click", handleNextButton);
 prevButton.addEventListener("click", handlePrevButton);
 if (restartButton) restartButton.addEventListener("click", startQuiz);
