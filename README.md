@@ -1,3 +1,3 @@
 ## NIS2 Kalkulačka
 
-Tato webová aplikace byla vytvořena v rámci úkolu, ke přijímacímu pohovoru na stáž. Webová aplikace pomáhá organizacím zjistit, zda na ně dopadá nový **Zákon o kybernetické bezpečnosti** vycházející ze směrnice **NIS2**.
+Tato webová aplikace byla vytvořena jako součást úkolu k přijímacímu pohovoru na stáž a slouží jako demo ukázka. Aplikace pomáhá organizacím zjistit, zda se na ně vztahuje nový **Zákon o kybernetické bezpečnosti**, který vychází ze směrnice **NIS2**.
